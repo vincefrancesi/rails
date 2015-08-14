@@ -43,48 +43,6 @@ Fixtures are a way of organizing test data; they reside in the `fixtures` direct
 
 The `test_helper.rb` file holds the default configuration for your tests.
 
-### Running Tests
-
-We can run all of our tests at once by using the `rails test` command.
-
-Or we can run a single test by passing the `rails test` command the filename containing the test cases.
-
-```bash
-$ bin/rails test test/models/article_test.rb
-.
-
-Finished tests in 0.009262s, 107.9680 tests/s, 107.9680 assertions/s.
-
-1 tests, 1 assertions, 0 failures, 0 errors, 0 skips
-```
-
-This will run all test methods from the test case.
-
-You can also run a particular test method from the test case by providing the `-n` or `--name` flag and the `test method name`.
-
-```bash
-$ bin/rails test test/models/article_test.rb -n test_the_truth
-.
-
-Finished tests in 0.009064s, 110.3266 tests/s, 110.3266 assertions/s.
-
-1 tests, 1 assertions, 0 failures, 0 errors, 0 skips
-```
-
-The `.` (dot) above indicates a passing test. When a test fails you see an `F`; when a test throws an error you see an `E` in its place. The last line of the output is the summary.
-
-You can also run a test at a specific line by providing the line number.
-
-```bash
-$ bin/rails test test/models/post_test.rb:44 # run specific test and line
-```
-
-You can also run an entire directory of tests by providing the path to the directory.
-
-```bash
-$ bin/rails test test/controllers # run all tests from specific directory
-```
-
 
 ### The Test Environment
 
@@ -96,9 +54,7 @@ NOTE: Your test are run under RAILS_ENV=test.
 
 ### Rails meets Minitest
 
-For this guide we will be using the application we built in the [Getting Started with Rails](getting_started.html) guide.
-
-If you remember when you used the `rails generate scaffold` command from earlier. We created our first resource among other things it created a test stub in the `test/models` directory:
+If you remember when you used the `rails generate scaffold` command from the [Getting Started with Rails](getting_started.html) guide. We created our first resource among other things it created test stubs in the `test` directory:
 
 ```bash
 $ bin/rails generate scaffold article title:string body:text
@@ -382,12 +338,51 @@ Each of these classes include `Minitest::Assertions`, allowing us to use all of 
 
 NOTE: For more information on `Minitest`, refer to [Minitest](http://docs.seattlerb.org/minitest)
 
-Database Testing
-----------------
+### The Rails Test Runner
+
+We can run all of our tests at once by using the `rails test` command.
+
+Or we can run a single test by passing the `rails test` command the filename containing the test cases.
+
+```bash
+$ bin/rails test test/models/article_test.rb
+.
+
+Finished tests in 0.009262s, 107.9680 tests/s, 107.9680 assertions/s.
+
+1 tests, 1 assertions, 0 failures, 0 errors, 0 skips
+```
+
+This will run all test methods from the test case.
+
+You can also run a particular test method from the test case by providing the `-n` or `--name` flag and the `test method name`.
+
+```bash
+$ bin/rails test test/models/article_test.rb -n test_the_truth
+.
+
+Finished tests in 0.009064s, 110.3266 tests/s, 110.3266 assertions/s.
+
+1 tests, 1 assertions, 0 failures, 0 errors, 0 skips
+```
+
+You can also run a test at a specific line by providing the line number.
+
+```bash
+$ bin/rails test test/models/post_test.rb:44 # run specific test and line
+```
+
+You can also run an entire directory of tests by providing the path to the directory.
+
+```bash
+$ bin/rails test test/controllers # run all tests from specific directory
+```
+
+
+The Test Database
+-----------------
 
 Just about every Rails application interacts heavily with a database and, as a result, your tests will need a database to interact with as well. To write efficient tests, you'll need to understand how to set up this database and populate it with sample data.
-
-### The Test Database
 
 By default, every Rails application has three environments: development, test, and production. The database for each one of them is configured in `config/database.yml`.
 
